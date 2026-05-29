@@ -99,7 +99,7 @@ do
   vim.g.maplocalleader = ' '
 
   -- Set to true if you have a Nerd Font installed and selected in the terminal
-  vim.g.have_nerd_font = false
+  vim.g.have_nerd_font = true 
 
   -- [[ Setting options ]]
   --  See `:help vim.o`
@@ -441,6 +441,14 @@ do
 
   -- ... and there is more!
   --  Check out: https://github.com/nvim-mini/mini.nvim
+  
+  -- render-markdown.nvim
+  vim.pack.add({
+    'https://github.com/nvim-treesitter/nvim-treesitter',
+    'https://github.com/nvim-mini/mini.nvim',            -- if you use the mini.nvim suite
+    'https://github.com/MeanderingProgrammer/render-markdown.nvim',
+  })
+  require('render-markdown').setup({}) -- only mandatory if you want to set custom options
 end
 
 -- ============================================================
@@ -762,6 +770,8 @@ do
     vim.lsp.config(name, server)
     vim.lsp.enable(name)
   end
+  
+  vim.lsp.enable('marksman')
 end
 
 -- ============================================================
@@ -881,6 +891,16 @@ do
 
     -- Shows a signature help window while you type arguments for a function
     signature = { enabled = true },
+  }
+  -- 1. Install and load the plugin natively
+  vim.pack.add({
+    "https://github.com/ggml-org/llama.vim" 
+  })
+
+  -- 2. Configure it using global variables (since it's a Vimscript plugin)
+  vim.g.llama_config = {
+      show_info = true,
+      -- auto_fim = false, -- uncomment to disable auto FIM
   }
 end
 
